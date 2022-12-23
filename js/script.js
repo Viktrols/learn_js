@@ -445,3 +445,16 @@ function transferWaitors(data) {
 
 transferWaitors(restorantData);
 console.log(transferWaitors(restorantData));
+
+
+function factorial(n) {
+    if (!Number.isInteger(n)){
+        return "Variable isn't valid integer";
+    } else if (n < 1) {
+        return 1;
+    } else{
+        return factorial(n-1) * n;
+    }
+}
+
+console.log(factorial(5));
