@@ -1,4 +1,4 @@
-/* Задания на урок:
+/* Задания на урок 1:
 
 1) Удалить все рекламные блоки со страницы (правая часть сайта)
 
@@ -11,6 +11,24 @@
 Отсортировать их по алфавиту 
 
 5) Добавить нумерацию выведенных фильмов */
+
+
+/* Задания на урок 2:
+
+1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+новый фильм добавляется в список. Страница не должна перезагружаться.
+Новый фильм должен добавляться в movieDB.movies.
+Для получения доступа к значению input - обращаемся к нему как input.value;
+P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
+
+2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
+
+3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
+
+4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
+"Добавляем любимый фильм"
+
+5) Фильмы должны быть отсортированы по алфавиту */
 
 'use strict';
 
@@ -25,31 +43,60 @@ const movieDB = {
     ]
 };
 
-// const advertising = document.querySelector('.promo__adv');
-// advertising.remove();
+const allAdvertising = document.querySelectorAll('.promo__adv img'),
+      promoGenre = document.querySelector('.promo__genre'),
+      promoBg = document.querySelector('.promo__bg'),
+      promoInterList = document.querySelector('.promo__interactive-list'),
+      form = document.querySelector('.add'),
+      inputFilm = form.querySelector('.adding__input'),
+      isFavorite = form.querySelector('input[type=checkbox]');
 
-const allAdvertising = document.querySelectorAll('.promo__adv img');
-allAdvertising.forEach(elem => elem.remove());
+
+const deleteElems = (array) =>{
+    array.forEach(elem => {
+        elem.remove();
+    });
+};
+
+function createMoviesList (films, parent) {
+    parent.innerHTML = '';
+    films.sort();
+    films.forEach(function(film, index) {
+        parent.innerHTML += `<li class="promo__interactive-item">${index+1}. ${film}
+                             <div class="delete"></div>
+                             </li>`;
+    });
+
+    document.querySelectorAll('.delete').forEach((elem, index) => {
+        elem.addEventListener('click', () => {
+            elem.parentElement.remove();
+            films.splice(index, 1);
+            createMoviesList(films, parent );
+        });
+    });
+}
 
 
-const promoGenre = document.querySelector('.promo__genre');
-// promoGenre.innerHTML = 'драма';
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    let film = inputFilm.value.trim();
+    if (film) {
+        if (film.length > 21){
+            film = `${film.substring(0, 22)}...`;
+        }
+        movieDB.movies.push(film);
+        if (isFavorite.checked){
+            console.log("Добавляем любимый фильм");
+        }
+        createMoviesList(movieDB.movies, promoInterList);
+        form.reset();
+    }
+});
+
+deleteElems(allAdvertising);
+
 promoGenre.textContent = 'драма';
-
-const promoBg = document.querySelector('.promo__bg');
 promoBg.style.background = "url('img/bg.jpg')";
 promoBg.style.backgroundSize = "100%";
 
-const promoInterList = document.querySelector('.promo__interactive-list');
-promoInterList.innerHTML = '';
-movieDB.movies.sort();
-
-movieDB.movies.forEach(function(item, index) {
-    // const li = document.createElement('li');
-    // li.classList.add('promo__interactive-item');
-    // li.innerHTML = `${index+1}. ${item}<div class="delete"></div>`;
-    // promoInterList.append(li);
-    promoInterList.innerHTML += `<li class="promo__interactive-item">${index+1}. ${item}
-                 <div class="delete"></div>
-                 </li>`;
-});
+createMoviesList(movieDB.movies, promoInterList);
