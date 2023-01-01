@@ -458,3 +458,17 @@ function factorial(n) {
 }
 
 console.log(factorial(5));
+
+
+function deepCount(a){
+    let res = 0;
+    res += a.length;
+    a.forEach(el => {
+        if (Array.isArray(el)) {
+            res+= deepCount(el);
+        }
+    });
+    return res;
+}
+
+console.log(deepCount(["1", 5, "3", ["10"]]));  //=> 5
