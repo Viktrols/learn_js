@@ -15,48 +15,48 @@ let lastMovieRate = +prompt('Оцените его?', '');
 personalMovieDB.movies[lastMovie] = lastMovieRate;
 // console.log(personalMovieDB);
 
-for (let i = 5; i<11; i++) {
-    console.log(i);
-}
-for (let i = 20; i>9; i--) {
-    console.log(i);
-    if (i == 13) {
-        break;
-    }
-}
-for (let i = 2; i<11; i+=2) {
-    console.log(i);
-}
+// for (let i = 5; i<11; i++) {
+//     console.log(i);
+// }
+// for (let i = 20; i>9; i--) {
+//     console.log(i);
+//     if (i == 13) {
+//         break;
+//     }
+// }
+// for (let i = 2; i<11; i+=2) {
+//     console.log(i);
+// }
 
-for (let i = 2; i <= 16; i++) {
-    if (i % 2 === 0) {
-        continue;
-    } else {
-        console.log(i);
-    }
-}
-let i = 2;
-while (i < 16) {
-    i++;
-    if (i % 2 === 0) {
-        continue;
-    } else {
-        console.log(i);
-    } 
-}
+// for (let i = 2; i <= 16; i++) {
+//     if (i % 2 === 0) {
+//         continue;
+//     } else {
+//         console.log(i);
+//     }
+// }
+// let i = 2;
+// while (i < 16) {
+//     i++;
+//     if (i % 2 === 0) {
+//         continue;
+//     } else {
+//         console.log(i);
+//     } 
+// }
 
 const arrayOfNumbers = [];
 for (let i = 5; i<11; i++) {
     arrayOfNumbers.push(i);
 }
-console.log(arrayOfNumbers);
+// console.log(arrayOfNumbers);
 
 const arr = [3, 5, 8, 16, 20, 23, 50];
 const result = [];
 for (let i = 0; i < arr.length; i++) {
     result[i] = arr[i];
 }
-console.log(result);
+// console.log(result);
 
 const data = [5, 10, 'Shopping', 20, 'Homework'];
 for (let i = 0; i < data.length; i++) {
@@ -66,7 +66,7 @@ for (let i = 0; i < data.length; i++) {
         data[i] = data[i] += ' - done';
     }
 }
-console.log(data);
+// console.log(data);
 
 const data2 = [5, 10, 'Shopping', 20, 'Homework'];
 const result2 = [];
@@ -74,8 +74,8 @@ for (let i = (data2.length-1); i>=0; i--) {
 //    result2.push(data2[i]);
     result2[i - 1] = data2[data2.length - i];
 }
-console.log(data2);
-console.log(result2);
+// console.log(data2);
+// console.log(result2);
 
 
 //      *
@@ -101,15 +101,15 @@ for (let i = 0; i <= lines; i++) {
 // console.log(result3);
 
 const caalc = (a, b) => a + b;
-console.log(caalc(2,3));
+// console.log(caalc(2,3));
 
 const calc2 = (a, b) => {return a + b;};
-console.log(calc2(9, 10));
+// console.log(calc2(9, 10));
 
 function returnNeighboringNumbers(num) {
     return [num-1, num, num+1];
 }
-console.log(returnNeighboringNumbers(5));
+// console.log(returnNeighboringNumbers(5));
 
 function getMathResult(num, count) {
     if (count <= 0 || typeof count !=="number"){
@@ -125,21 +125,21 @@ function getMathResult(num, count) {
         return res;
     }
 }
-console.log(getMathResult(3, 10));
+// console.log(getMathResult(3, 10));
 
 
 let str = 'bla bla xxx';
 
-console.log(str.indexOf('bbb'));
+// console.log(str.indexOf('bbb'));
 
 const logg = 'hello world';
-console.log(logg.substr(1, 6));
+// console.log(logg.substr(1, 6));
 
 const x = [1,2,3,4,5,6,7];
-console.log(x.indexOf(3));
+// console.log(x.indexOf(3));
 
 const num = "12.78px";
-console.log(parseFloat(num));
+// console.log(parseFloat(num));
 
 
 function calculateVolumeAndArea(n) {
@@ -152,7 +152,7 @@ function calculateVolumeAndArea(n) {
     }
     
 }
-console.log(calculateVolumeAndArea(-5));
+// console.log(calculateVolumeAndArea(-5));
 
 function getCoupeNumber(n) {
     if (n === 0 | n > 36) {
@@ -163,7 +163,7 @@ function getCoupeNumber(n) {
         return Math.ceil(n / 4);
     }
 }
-console.log(getCoupeNumber(0));
+// console.log(getCoupeNumber(0));
 
 
 function getTimeFromMinutes(n) {
@@ -192,7 +192,7 @@ function getTimeFromMinutes(n) {
         return `Это ${hours} ${hoursStr} и ${minutes} ${minutesStr}`;
     }
 }
-console.log(getTimeFromMinutes(1311));
+// console.log(getTimeFromMinutes(1311));
 
 
 // 2) Напишите функцию, которая принимает в себя 4 числа и возвращает самое большее из них.
@@ -208,7 +208,7 @@ function findMaxNumber(a, b, c, d) {
         return Math.max(a,b,c,d);
     }
 }
-console.log(findMaxNumber(1,21,3,4));
+// console.log(findMaxNumber(1,21,3,4));
 
 function fib(num) {
     if (typeof(num) !== 'number' || num <= 0 || !Number.isInteger(num)) {
@@ -235,7 +235,7 @@ function fib(num) {
     return result;
 }
 
-console.log(fib(5));
+// console.log(fib(5));
 
 
 
@@ -243,15 +243,15 @@ const arr2 = ['a', 'b', 'c'];
 
 arr2.test = 'bad';
 // arr2.test;
-console.log(arr2[1] === arr2['1']);
+// console.log(arr2[1] === arr2['1']);
 
-for (let i in arr2) {
-    console.log(arr2[i]);
-}
-console.log(arr2);
-for (let i2 of arr2) {
-    console.log(arr2[i2]);
-}
+// for (let i in arr2) {
+//     console.log(arr2[i]);
+// }
+// console.log(arr2);
+// for (let i2 of arr2) {
+//     console.log(arr2[i2]);
+// }
 
 
 const personalPlanPeter = {
@@ -288,7 +288,7 @@ personalPlanPeter.showAgeAndLangs = function (obj) {
     const upperElems = languages.map(element => {return element.toUpperCase();});
     return `Мне ${obj.age} и я владею языками: ${upperElems.join(' ')}`;
 };
-console.log(personalPlanPeter.showAgeAndLangs(personalPlanPeter));
+// console.log(personalPlanPeter.showAgeAndLangs(personalPlanPeter));
 
 
 const family = ['Peter', 'Ann', 'Alex', 'Linda'];
@@ -342,7 +342,7 @@ function availableCurr(arr, missingCurr) {
         return result;
     }}
 
-console.log(availableCurr(additionalCurrencies, 'CNY'));
+// console.log(availableCurr(additionalCurrencies, 'CNY'));
 
 const shoppingMallData = {
     shops: [{width: 10, length: 5}, {width: 15, length: 7}, {width: 20, length: 5}, {width: 8, length: 10}],
@@ -422,7 +422,7 @@ function isOpen(prop) {
     }
 }
 
-console.log(isOpen(restorantData.openNow));
+// console.log(isOpen(restorantData.openNow));
 
 function isAverageLunchPriceTrue(fDish, sDish, average) {
     console.log(+fDish.price.slice(0, -1));
@@ -435,7 +435,7 @@ function isAverageLunchPriceTrue(fDish, sDish, average) {
     }
 }
 
-console.log(isAverageLunchPriceTrue(restorantData.menu[0], restorantData.menu[1], restorantData.averageLunchPrice));
+// console.log(isAverageLunchPriceTrue(restorantData.menu[0], restorantData.menu[1], restorantData.averageLunchPrice));
 
 function transferWaitors(data) {
     const copy = Object.assign({}, data);
@@ -444,7 +444,7 @@ function transferWaitors(data) {
 }
 
 transferWaitors(restorantData);
-console.log(transferWaitors(restorantData));
+// console.log(transferWaitors(restorantData));
 
 
 function factorial(n) {
@@ -457,7 +457,7 @@ function factorial(n) {
     }
 }
 
-console.log(factorial(5));
+// console.log(factorial(5));
 
 
 function deepCount(a){
@@ -471,4 +471,71 @@ function deepCount(a){
     return res;
 }
 
-console.log(deepCount(["1", 5, "3", ["10"]]));  //=> 5
+// console.log(deepCount(["1", 5, "3", ["10"]]));  //=> 5
+
+
+const newObj = {
+    name: 'Me',
+    age: 28
+};
+const newObj2 = {
+    name: 'Me',
+    age: 28
+};
+
+// console.log(Object.is(newObj.name, newObj2.name));
+Object.defineProperty(newObj, 'name', {writable: false});
+newObj.name = 'Not me';
+// console.log(Object.getOwnPropertyDescriptors(newObj));
+
+const myMap = new Map(
+    [
+        ['2', {name: 'Ivan', age: 80}]
+    ]
+);
+myMap.set('1', 'String');
+// console.log(myMap.size);
+// console.log(myMap.entries());
+myMap.forEach((value, key, myMap) => {
+    console.log(key, '---', value);
+});
+
+
+
+// В каждой книге есть n страниц с номерами страниц от 1 до n.
+// Написать функцию amountOfPages, аргумент которой summary составляется путем сложения
+// количества цифр всех номеров страниц.
+// Эта функция возвращает число - количество страниц n в книге.
+// Пример:
+// Если на входе функции summary = 25, то на результат должен быть 17.
+// Всего в числах от 1 до 17 содержится 25 цифр: 1234567891011121314151617.
+
+
+function amountOfPages(summary){
+    let num = 0;
+    let sum = 0;
+    while (sum < summary) {
+        num++;
+        sum += String(num).length;
+    }
+    return num;
+}
+amountOfPages(25);  // => 17
+amountOfPages(5);  // => 5
+amountOfPages(1095); // => 401   
+amountOfPages(185); //=> 97
+
+
+// Напишите функцию isPangram, которая принимает в себя строку и возвращает логическое значение.
+// Если строка является панграммой - вернется true, если нет - false.
+
+
+function isPangram(string) {
+    let str = string.split(' ').join('').toLowerCase();
+    let set = new Set(str);
+    return set.size === 26;
+    
+}
+
+isPangram('The quick brown fox jumps over the lazy dog'); // => true
+isPangram('Hello world'); // => false
