@@ -539,3 +539,16 @@ function isPangram(string) {
 
 isPangram('The quick brown fox jumps over the lazy dog'); // => true
 isPangram('Hello world'); // => false
+
+
+let map = new WeakMap();
+let user = {name: 'Ivan'};
+map.set(user, 'somedata');
+console.log(map.has(user));
+user = null;
+console.log(map.has(user));
+
+const now = new Date();
+console.log(now);
+now.setHours(4);
+console.log(now);
