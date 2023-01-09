@@ -1,18 +1,18 @@
 "use strict";
 
-let numberOfFilms = +prompt('Cколько фильмов ты уже посмотрел?', '');
+// let numberOfFilms = +prompt('Cколько фильмов ты уже посмотрел?', '');
 let personalMovieDB = {
-    count: numberOfFilms,
+    // count: numberOfFilms,
     movies: {},
     actors: {},
     gemres: [],
     private: false
 };
 
-let lastMovie = prompt('Один из последних фильмов?','');
-let lastMovieRate = +prompt('Оцените его?', '');
+// let lastMovie = prompt('Один из последних фильмов?','');
+// let lastMovieRate = +prompt('Оцените его?', '');
 
-personalMovieDB.movies[lastMovie] = lastMovieRate;
+// personalMovieDB.movies[lastMovie] = lastMovieRate;
 // console.log(personalMovieDB);
 
 // for (let i = 5; i<11; i++) {
@@ -485,7 +485,7 @@ const newObj2 = {
 
 // console.log(Object.is(newObj.name, newObj2.name));
 Object.defineProperty(newObj, 'name', {writable: false});
-newObj.name = 'Not me';
+// newObj.name = 'Not me';
 // console.log(Object.getOwnPropertyDescriptors(newObj));
 
 const myMap = new Map(
@@ -552,3 +552,17 @@ const now = new Date();
 console.log(now);
 now.setHours(4);
 console.log(now);
+
+
+
+const test = {
+    name: 'test',
+    func: function(){
+        console.log(this);
+        function somefunc (){
+            console.log('this', this);
+        }
+        somefunc();
+    }
+};
+test.func();

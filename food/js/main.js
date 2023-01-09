@@ -132,4 +132,60 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
     window.addEventListener('scroll', openModalByScroll);
+
+    // Menu cards
+    class MenuItem {
+        constructor (name, description, price, imageLink, imageAlt, parentSelector) {
+            this.name = name;
+            this.description = description;
+            this.price = price;
+            this.imageLink = imageLink;
+            this.imageAlt = imageAlt;
+            this.parent = document.querySelector(parentSelector);
+        }
+        render(){
+            const element = document.createElement('div');
+            element.innerHTML = `
+                <div class="menu__item">
+                <img src=${this.imageLink} alt=${this.imageAlt}>
+                <h3 class="menu__item-subtitle">${this.name}</h3>
+                <div class="menu__item-descr">${this.description}</div>
+                <div class="menu__item-divider"></div>
+                <div class="menu__item-price">
+                    <div class="menu__item-cost">Цена:</div>
+                    <div class="menu__item-total"><span>${this.price}</span> руб/день</div>
+                </div>
+                </div>`;
+            this.parent.append(element);
+        }
+    }
+    new MenuItem(
+        'Меню "Фитнес"',
+        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. ' +
+        'Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+        600,
+        'img/tabs/vegy.jpg',
+        'vegy',
+        '.menu__field .container'
+        ).render();
+    new MenuItem(
+        'Меню “Премиум”',
+        'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. ' +
+        'Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+        800,
+        'img/tabs/elite.jpg',
+        'elite',
+        '.menu__field .container'
+        ).render();
+    new MenuItem(
+        'Меню "Постное"',
+        'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного ' +
+        'происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за ' +
+        'счет тофу и импортных вегетарианских стейков.',
+        700,
+        'img/tabs/post.jpg',
+        'post',
+        '.menu__field .container'
+    ).render();
+    
 });
