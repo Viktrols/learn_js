@@ -88,8 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
    
     // Modal
     const modalTriggers = document.querySelectorAll('[data-modal'),
-          modal = document.querySelector('.modal'),
-          modalClose = document.querySelector('[data-close');
+          modal = document.querySelector('.modal');
 
     function openModal() {
         modal.classList.add('show');
@@ -109,12 +108,10 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const openModalTimer = setTimeout(openModal, 5000);
-
-    modalClose.addEventListener('click', closeModal);
+    const openModalTimer = setTimeout(openModal, 500000);
 
     modal.addEventListener('click', (event) => {
-        if (event.target === modal){
+        if (event.target === modal || event.target.getAttribute('data-close') == ''){
             closeModal();
         }
     });
@@ -135,18 +132,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Menu cards
     class MenuItem {
-        constructor (name, description, price, imageLink, imageAlt, parentSelector) {
+        constructor (name, description, price, imageLink, imageAlt, parentSelector, ...classes) {
             this.name = name;
             this.description = description;
             this.price = price;
             this.imageLink = imageLink;
             this.imageAlt = imageAlt;
             this.parent = document.querySelector(parentSelector);
+            this.classes = classes;
         }
         render(){
             const element = document.createElement('div');
+            if (this.classes.length === 0) {
+                element.classList.add('menu__item');
+            } else {
+                this.classes.forEach(className => element.classList.add(className));
+            }
             element.innerHTML = `
-                <div class="menu__item">
                 <img src=${this.imageLink} alt=${this.imageAlt}>
                 <h3 class="menu__item-subtitle">${this.name}</h3>
                 <div class="menu__item-descr">${this.description}</div>
@@ -154,38 +156,95 @@ window.addEventListener('DOMContentLoaded', () => {
                 <div class="menu__item-price">
                     <div class="menu__item-cost">Цена:</div>
                     <div class="menu__item-total"><span>${this.price}</span> руб/день</div>
-                </div>
                 </div>`;
             this.parent.append(element);
         }
     }
-    new MenuItem(
-        'Меню "Фитнес"',
-        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. ' +
-        'Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-        600,
-        'img/tabs/vegy.jpg',
-        'vegy',
-        '.menu__field .container'
-        ).render();
-    new MenuItem(
-        'Меню “Премиум”',
-        'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. ' +
-        'Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-        800,
-        'img/tabs/elite.jpg',
-        'elite',
-        '.menu__field .container'
-        ).render();
-    new MenuItem(
-        'Меню "Постное"',
-        'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного ' +
-        'происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за ' +
-        'счет тофу и импортных вегетарианских стейков.',
-        700,
-        'img/tabs/post.jpg',
-        'post',
-        '.menu__field .container'
-    ).render();
+
+    const getData = async (url) => {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Could not fetch ${url}, status: ${response.status}`);
+        }   
+        return await response.json();
+    };
+    getData('http://127.0.0.1:8000/menus/')
+    .then(data => {
+        data.forEach(({name, description, price, image}) => {
+            new MenuItem(name, description, price, image, name, '.menu__field .container').render();
+        });
+    });
     
+    // Forms
+    const formContactMe = document.querySelectorAll('form');
+    const message = {
+        loading: 'img/spinner.svg',
+        success: 'Спасибо! Скоро мы с вами свяжемся',
+        failure: 'Что-то пошло не так...'
+    };
+
+    formContactMe.forEach(elem => {
+        postNewContact(elem);
+    });
+
+    const postData = async (url, data) => {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=utf-8'
+                    },
+            body: data
+        });
+        return await response.json();
+    };
+
+
+    function postNewContact(form) {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const statusMessage = document.createElement('img');
+            statusMessage.src = message.loading;
+            statusMessage.style.cssText = `
+                display: block;
+                margin: 0 auto;
+            `;
+            form.insertAdjacentElement('afterend', statusMessage);
+          
+            const contactFormData = new FormData(form);
+            const formJSON = JSON.stringify(Object.fromEntries(contactFormData.entries()));
+            
+            postData('http://127.0.0.1:8000/contacts/', formJSON)
+            .then(data => {
+                 showThanksModal(message.success);
+                }).catch(() => {
+                        showThanksModal(message.failure);
+                    }).finally(() => {
+                        form.reset();
+                        });
+        });
+    }
+
+    function showThanksModal (message) {
+        const prevModalDialog = document.querySelector('.modal__dialog');
+        prevModalDialog.classList.add('hide');
+        openModal();
+
+        const thanksModal = document.createElement('div');
+        thanksModal.classList.add('modal__dialog');
+        thanksModal.innerHTML = `
+            <div class="modal__content">
+                <div data-close class="modal__close">&times;</div>
+                <div class="modal__title">${message}</div>
+            </div>
+         `;
+        document.querySelector('.modal').append(thanksModal);
+        setTimeout(()=>{
+            thanksModal.remove();
+            prevModalDialog.classList.add('show');
+            prevModalDialog.classList.remove('hide');
+            closeModal();
+        }, 7000);
+
+    }
+
 });
