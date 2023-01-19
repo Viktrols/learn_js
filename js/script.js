@@ -566,3 +566,72 @@ const test = {
     }
 };
 test.func();
+
+
+const films = [
+    {
+        name: 'Titanic',
+        rating: 9
+    },
+    {
+        name: 'Die hard 5',
+        rating: 5
+    },
+    {
+        name: 'Matrix',
+        rating: 8
+    },
+    {
+        name: 'Some bad film',
+        rating: 4
+    }
+];
+
+function showGoodFilms(arr) {
+    return arr.filter(item => item.rating >= 8);
+}
+// console.log(showGoodFilms(films));
+
+function showListOfFilms(arr) {
+    return arr.map(film => film.name)
+    .reduce((str, film) => `${str}, ${film}`);
+}
+// console.log(showListOfFilms(films));
+
+function setFilmsIds(arr) {
+    return arr.map(function(film, index){
+        const res = film;
+        film.id = index;
+        return res;
+    });
+}
+// console.log(setFilmsIds(films));
+const tranformedArray = setFilmsIds(films);
+
+function checkFilms(arr) {
+    return arr.every(item => item.hasOwnProperty('id'));
+}
+// console.log(checkFilms(tranformedArray));
+
+const funds = [
+    {amount: -1400},
+    {amount: 2400},
+    {amount: -1000},
+    {amount: 500},
+    {amount: 10400},
+    {amount: -11400}
+];
+
+const getPositiveIncomeAmount = (data) => {
+    return data.map(num => num.amount).filter(num => num>= 1).reduce((sum, num) => sum + num);
+};
+// console.log(getPositiveIncomeAmount(funds));
+
+const getTotalIncomeAmount = (data) => {
+    if (data.some(num => num.amount < 0)){
+        return data.map(num => num.amount).reduce((sum, num) => sum + num);
+    } else {
+        getPositiveIncomeAmount(data);
+    }
+};
+console.log(getTotalIncomeAmount(funds));
