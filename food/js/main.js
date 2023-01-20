@@ -276,24 +276,6 @@ window.addEventListener('DOMContentLoaded', () => {
     slides.forEach(slide => {
         slide.style.width = slidesWidth;
     });
-    // next.addEventListener('click', () => {
-    //     if (offset == +slidesWidth.slice(0, slidesWidth.length - 2) * (slides.length - 1)) {
-    //         offset = 0;
-    //     } else {
-    //         offset += +slidesWidth.slice(0, slidesWidth.length - 2);
-    //     }
-    //     slidesField.style.transform = `translateX(-${offset}px)`;
-    //     if (slideIndex == slides.length) {
-    //         slideIndex = 1;
-    //     } else {
-    //         slideIndex++;
-    //     }
-    //     if (slides.length < 10) {
-    //         currentElement.textContent = `0${slideIndex}`;
-    //     } else {
-    //         currentElement.textContent = slideIndex;
-    //     }
-    // });
 
     function moveSlider (direction) {
         if (direction === 'forward') {
@@ -336,27 +318,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     setInterval(moveSlider, 5000, 'forward');
-
-
-    // prev.addEventListener('click', () => {
-    //     if (offset === 0) {
-    //         offset = +slidesWidth.slice(0, slidesWidth.length - 2) * (slides.length - 1);
-    //     } else {
-    //         offset -= +slidesWidth.slice(0, slidesWidth.length - 2);
-    //     }
-    //     slidesField.style.transform = `translateX(-${offset}px)`;
-
-    //     if (slideIndex == 1) {
-    //         slideIndex = slides.length;
-    //     } else {
-    //         slideIndex--;
-    //     }
-    //     if (slides.length < 10) {
-    //         currentElement.textContent = `0${slideIndex}`;
-    //     } else {
-    //         currentElement.textContent = slideIndex;
-    //     }
-    // });
 
     // Вариант для лохов:
 
