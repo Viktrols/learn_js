@@ -382,4 +382,68 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Calculator
+    const result = document.querySelector('.calculating__result span');
+    let gender = 'femail',
+        weight, height, age,
+        ratio = 1.375;
+
+    function calculateResult() {
+        if (!gender || !weight || ! height || !age || !ratio) {
+            result.textContent = '___';
+            return;
+        }
+        if (gender === 'female') {
+            result.textContent = 
+            Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
+        } else {
+            result.textContent = 
+            Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
+        }
+    }
+    calculateResult();
+
+    function getStaticInfo(parentSelector, activeClass) {
+        const elements = document.querySelectorAll(`${parentSelector} div`);
+        elements.forEach(elem => {
+            elem.addEventListener('click', (e) => {
+                if (e.target.getAttribute('data-ratio')) {
+                    ratio = +e.target.getAttribute('data-ratio');
+                } else {
+                    gender = e.target.getAttribute('id');
+                }
+            
+                elements.forEach(elem => {
+                    elem.classList.remove(activeClass);
+                });
+                e.target.classList.add(activeClass);
+                calculateResult();
+            });
+        });
+    }
+    getStaticInfo('#gender', 'calculating__choose-item_active');
+    getStaticInfo('.calculating__choose_big' , 'calculating__choose-item_active');
+
+    function getInputInfo(inputSelector) {
+        const input = document.querySelector(inputSelector);
+        input.addEventListener('input', () => {
+            switch(input.getAttribute('id')) {
+                case 'height':
+                    height = +input.value;
+                    break;
+                case 'weight':
+                    weight = +input.value;
+                    break;
+                case 'age':
+                    age = +input.value;
+                    break;
+            }
+            calculateResult();
+        });
+    }
+    getInputInfo('#height');
+    getInputInfo('#weight');
+    getInputInfo('#age');
+
+
 });
