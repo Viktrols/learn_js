@@ -1,4 +1,4 @@
-function timer() {
+function timer(deadline, timerSelector) {
     function getTimeRemaining(deadline) {
         let days, hours, minutes, seconds;
         const now = Date.now(),
@@ -44,9 +44,8 @@ function timer() {
             }
         }
     }
-    const deadline = '2023-02-20',
-          timerSelector = '.timer';
+
     setTimer(timerSelector, deadline);
 }
 
-module.exports = timer;
+export default timer;

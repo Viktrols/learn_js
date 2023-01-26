@@ -1,3 +1,5 @@
+import { getData } from "../services/services";
+
 function menuCards() {
     class MenuItem {
         constructor (name, description, price, imageLink, imageAlt, parentSelector, ...classes) {
@@ -28,13 +30,7 @@ function menuCards() {
             this.parent.append(element);
         }
     }
-    const getData = async (url) => {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${response.status}`);
-        }   
-        return await response.json();
-    };
+    
     getData('http://127.0.0.1:8000/menus/')
     .then(data => {
         data.forEach(({name, description, price, image}) => {
@@ -43,4 +39,4 @@ function menuCards() {
     });
 }
 
-module.exports = menuCards;
+export default menuCards;
