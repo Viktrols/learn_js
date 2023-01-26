@@ -6,4 +6,4 @@ media/
 __pycache__/
 *.sqlite3
 # JS
-/node_modules
+node_modules/
